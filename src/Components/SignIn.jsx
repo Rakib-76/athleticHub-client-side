@@ -1,7 +1,7 @@
 import React, { use } from 'react';
 import lottieSignIn from '../../assets/Sign_In.json'
 import Lottie from 'lottie-react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
 // import { toast, ToastContainer } from 'react-toastify';
@@ -61,6 +61,7 @@ const SignIn = () => {
                                 <input type="password" className="input" placeholder="Password" name="password" />
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <button className="btn btn-neutral mt-4">SignIn</button>
+                                <p className='font-bold text-center mt-4 text-accent'>Dont’t Have An Account ? <Link to='/register' className=' underline text-red-800 '>Register</Link></p>
                             </fieldset>
                         </form>
                     </div>

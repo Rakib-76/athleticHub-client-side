@@ -1,90 +1,18 @@
-// import Lottie from 'lottie-react';
-// import React, { use } from 'react';
-// import registerLottie from "../../assets/register.json"
-// import { AuthContext } from '../providers/AuthContext';
-// import { useNavigate } from 'react-router';
-// import { toast, ToastContainer } from 'react-toastify';
-
-// const Register = () => {
-//     const { createUser } = use(AuthContext);
-//     const Navigate = useNavigate();
-
-//     const handleRegister = e => {
-//         e.preventDefault();
-//         const form = e.target
-//         const email = form.email.value;
-//         const password = form.password.value;
-//         const photo= form.photo.value;
-//         console.log(email, password ,photo);
-
-
-//         createUser(email, password)
-//             .then((result) => {
-//                 console.log(result.user);
-//                 toast.success("Registered Successfully");
-//                 Navigate("/")
-//             })
-//             .catch((error) => {
-//                 const errorMessage = error.message;
-//                 console.log(errorMessage);
-//                   toast.error("Registration Failed");
-
-//             });
-
-
-//     };
-
-
-//     return (
-//         <div className="max-w-4xl mx-auto ">
-//             <div className="hero-content flex-col lg:flex-row-reverse">
-
-//                 <div className='lg:text-left'>
-//                     <Lottie style={{ width: '300px' }} animationData={registerLottie} loop={true}></Lottie>
-//                 </div>
-//                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-
-//                     <div className="card-body">
-//                         <form onSubmit={handleRegister}>
-//                             <fieldset className="fieldset">
-//                                 <label className="label">Full Name</label>
-//                                 <input type="text" className="input" placeholder="Enter Your fullname" />
-//                                 <label className="label">Email</label>
-//                                 <input type="email" className="input" placeholder="Email" name='email' />
-//                                  <label className="label">Photo URL</label>
-//                                 <input type="text" className="input" placeholder="Enter Your Photo" name='photo' />
-//                                 <label className="label">Password</label>
-//                                 <input type="password" className="input" placeholder="Password" name="password" />
-//                                 <div><a className="link link-hover">Forgot password?</a></div>
-//                                 <button className="btn btn-neutral mt-4">Register</button>
-//                             </fieldset>
-//                         </form>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Register;
-
-
-
 
 import Lottie from 'lottie-react';
-import React, { use, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import registerLottie from "../../assets/register.json"
 import { AuthContext } from '../providers/AuthContext';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate} from 'react-router';
 import Swal from 'sweetalert2';
 
 
 
 const Register = () => {
-    const { createUser, setUser, updateUser } = use(AuthContext);
+    const { createUser, setUser, updateUser } = useContext(AuthContext);
     const [error, setError] = useState("");
     // console.log(createUser);
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
     const handleRegister = e => {
         e.preventDefault();
 
@@ -113,18 +41,16 @@ const Register = () => {
 
         setError("")
 
-       createUser(email, password)
+        createUser(email, password)
             .then((result) => {
                 // Signed up 
                 const user = result.user;
-                 updateUser({ displayName: name, photoURL: photo })
+                updateUser({ displayName: name, photoURL: photo })
                     .then(() => {
-                        setUser({ ...user, displayName: name, photoURL: photo });
-                         Navigate(`${location.state ? location.state : "/"}`)
-
+                         setUser({ ...user, displayName: name, photoURL: photo });
+                        navigate("/")
                     })
-                // console.log(user)
-                setUser(user)
+               
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -147,7 +73,7 @@ const Register = () => {
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl flex justify-center py-4 z-0 ">
 
                 <div className='lg:text-left'>
-                     <Lottie style={{ width: '200px' }} animationData={registerLottie} loop={true}></Lottie>
+                    <Lottie style={{ width: '200px' }} animationData={registerLottie} loop={true}></Lottie>
                 </div>
 
                 <form onSubmit={handleRegister} className="card-body" >
@@ -191,7 +117,7 @@ const Register = () => {
                             type='submit'
                             className="btn bg-[#403f3f] mt-4 text-white">Register</button>
                         <p
-                            className='font-bold text-center mt-4 text-accent'>Already Have An Account ? <Link to='/auth/login' className=' underline text-red-800 '>Login</Link></p>
+                            className='font-bold text-center mt-4 text-accent'>Already Have An Account ? <Link to='/login' className=' underline text-red-800 '>Login</Link></p>
                     </fieldset>
                 </form>
             </div>
@@ -200,3 +126,5 @@ const Register = () => {
 };
 
 export default Register;
+
+

@@ -38,7 +38,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar mt-5 max-w-7xl mx-auto">
+        <div className="navbar mt-5 max-w-8xl mx-auto">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -79,7 +79,7 @@ const Navbar = () => {
 
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="text-4xl">
-                    
+
                         <div className="relative group">
                             {user && user.photoURL ? (
                                 <img
@@ -107,19 +107,21 @@ const Navbar = () => {
                         <li className='font-bold'><a>Manage Events</a></li>
                     </ul>
                 </div>
+                <div>
 
-                {
-                    user ? "" :
-                        <Link to="/register">
-                            <a className="btn">Register</a>
-                        </Link>
-                }
-                {
-                    user ? <button className='btn bg-[#3c65f5] text-white hover:bg-blue-950' onClick={handleSignOut}>Logout</button> :
-                        <Link to="/login">
-                            <a className="btn bg-[#3c65f5] text-white hover:bg-blue-950">Sign In</a>
-                        </Link>
-                }
+
+                    <div>
+
+                        {
+                            user ? <button
+                                //   onClick={handleLogout}
+                                className='btn btn-primary px-10' onClick={handleSignOut}>LogOut</button> : <span className='flex items-center  gap-1'>
+                                <Link to='/login'> <button className='btn btn-primary'>Login</button> </Link>
+
+                            </span>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     );
