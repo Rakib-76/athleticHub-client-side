@@ -1,5 +1,6 @@
 import React from 'react';
 import Trainer from './Trainer';
+import Session from './Session';
 // import FeaturedGroups from './FeatureGroup';
 // import MyGroupsPage from './MyGroup';
 // import FeaturedCard from './FeaturedCard';
@@ -49,7 +50,7 @@ const Home = () => {
       </section>
 
       <section>
-        {/* <MakeYourGroup></MakeYourGroup> */}
+        <Session></Session>
       </section>
       <section>
         {/* <FIndHobby></FIndHobby> */}
