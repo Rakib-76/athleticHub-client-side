@@ -1,5 +1,4 @@
 import React, { use } from 'react';
-import cube from '../../assets/3d-model.png'
 import { motion } from "framer-motion";
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../providers/AuthContext';
@@ -36,6 +35,7 @@ const Navbar = () => {
     //     <li><a className='font-bold'>Home</a></li>
     //     <li><a className='font-bold'>Events Page</a></li>
     // </>
+
 
     return (
         <div className="navbar mt-5 max-w-7xl mx-auto">
@@ -78,7 +78,29 @@ const Navbar = () => {
             <div className="navbar-end gap-2">
 
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="text-4xl"><FaUserCircle></FaUserCircle></div>
+                    <div tabIndex={0} role="button" className="text-4xl">
+                    
+                        <div className="relative group">
+                            {user && user.photoURL ? (
+                                <img
+                                    className="w-10 h-10 rounded-full"
+                                    src={user.photoURL}
+                                    alt="User"
+                                />
+                            ) : (
+                                <FaUserCircle className="w-10 h-10 text-gray-600" />
+                            )}
+                            {user?.displayName && (
+                                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-200 z-50">
+                                    {user.displayName}
+                                </div>
+                            )}
+
+
+
+                        </div>
+
+                    </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                         <li className='font-bold'><a>Book Event </a></li>
                         <li className='font-bold'><a>My Bookings</a></li>
