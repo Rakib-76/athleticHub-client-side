@@ -48,9 +48,10 @@ const Register = () => {
                 updateUser({ displayName: name, photoURL: photo })
                     .then(() => {
                          setUser({ ...user, displayName: name, photoURL: photo });
-                        navigate("/")
+                         console.log("Navigating to home...");
+                        //  navigate("/");
                     })
-               
+                // setUser(user);    
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -58,6 +59,8 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                 navigate("/");
+                 setUser(user);  
             })
             .catch((error) => {
                 // const errorCode = error.code;

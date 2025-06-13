@@ -3,6 +3,7 @@ import HomeLayout from "../layouts/HomeLayout";
 import Home from "../Pages/Home";
 import Register from "../Components/Register";
 import SignIn from "../Components/SignIn";
+import EventManage from "../Pages/EventManage";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
                 path: "/login",
                 Component: SignIn
             },
+            {
+                path:"/eventmanage",
+                Component:EventManage
+            }
         ]
 
     },
