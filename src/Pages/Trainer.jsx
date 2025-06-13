@@ -6,7 +6,7 @@ const Trainer = () => {
                 <h1 className='text-blue-800 text-center text-6xl font-medium'>Our top Trainers</h1>
                 <p className='text-gray-500 text-center font-bold mt-5 max-w-5xl mx-auto'>Our top trainer is a skilled, experienced, and dedicated professional who has been involved in teaching and training for many years. Every session they lead is interactive, insightful, and impactful—preparing learners to face real-world challenges with confidence.</p>
 
-            <div className='grid grid-cols-4'>
+            <div className='grid grid-cols-1 lg:grid-cols-4'>
 
                 <div className="card bg-base-100 w-96 shadow-sm">
                     <figure className="px-10 pt-10">
