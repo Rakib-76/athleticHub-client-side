@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../providers/AuthContext';
+import Swal from 'sweetalert2';
 
 const EventManage = () => {
 
@@ -9,11 +10,56 @@ const EventManage = () => {
     const category = ["Swimming", "Sprinting", "Long Jump", "High Jump", "Running", "Hurdle race"]
 
 
+        const handleCreateEvent = (e) => {
+        e.preventDefault();
+        const form = e.target;
+
+        const groupData = {
+            name: form.name.value,
+            category: selectedCategory,
+            description: form.description.value,
+            date: form.date.value,
+            username: form.username.value,
+            email: form.email.value,
+            photo: form.photo.value
+        };
+
+             console.log(groupData);
+
+
+               fetch('http://localhost:3000/events', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(groupData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("after seding data", data);
+
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Group create  successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    form.reset();
+
+                }
+
+
+            })
+    };
+
     return (
         <div className='mt-10 p-10'>
             <h1 className='text-5xl font-bold text-center'>Create a event</h1>
 
-            <form>
+            <form onSubmit={handleCreateEvent}>
                 <div className='grid grid-cols-1 md:grid-cols-2'>
                     <div className="card-body ">
                         <fieldset className="fieldset">

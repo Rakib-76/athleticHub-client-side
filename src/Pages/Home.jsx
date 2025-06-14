@@ -1,6 +1,7 @@
 import React from 'react';
 import Trainer from './Trainer';
 import Session from './Session';
+import FeaturedEvents from './FeaturedEvents';
 // import FeaturedGroups from './FeatureGroup';
 // import MyGroupsPage from './MyGroup';
 // import FeaturedCard from './FeaturedCard';
@@ -42,6 +43,10 @@ const Home = () => {
         </div>
       </section>
 
+
+      <section>
+        <FeaturedEvents></FeaturedEvents>
+      </section>
 
 
       <section>
