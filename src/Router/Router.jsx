@@ -3,9 +3,11 @@ import HomeLayout from "../layouts/HomeLayout";
 import Home from "../Pages/Home";
 import Register from "../Components/Register";
 import SignIn from "../Components/SignIn";
-import EventManage from "../Pages/EventManage";
+import EventManage from "../Pages/CreateEvent";
 import FeaturedEvents from "../Pages/FeaturedEvents";
 import DetailsEvent from "../Pages/DetailsEvent";
+import CreateEvent from "../Pages/CreateEvent";
+import EventPages from "../Pages/EventPages";
 
 const router = createBrowserRouter([
     {
@@ -17,11 +19,6 @@ const router = createBrowserRouter([
                 loader: () => fetch('http://localhost:3000/events'),
                 Component: Home
             },
-            // {
-            //     path: '/events',
-            //     loader: () => fetch('http://localhost:3000/events'),
-            //     Component: FeaturedEvents
-            // },
             {
                 path: "/register",
                 Component: Register
@@ -31,8 +28,13 @@ const router = createBrowserRouter([
                 Component: SignIn
             },
             {
-                path: "/eventmanage",
-                Component: EventManage
+                path: "/createEvent",
+                Component: CreateEvent
+            },
+            {
+                path: "/eventPage",
+                loader: () => fetch('http://localhost:3000/events'),
+                Component: EventPages
             },
             {
                 path: "/detailsEvent/:id",

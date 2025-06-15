@@ -50,7 +50,8 @@ const Navbar = () => {
                         <Link to="/">
                             <li className='font-bold'><a>Home</a></li>
                         </Link>
-                        <li className='font-bold'><a>Event Pages</a></li>
+                        <Link to="/eventPage"><li className='font-bold'><a>Event Pages</a></li></Link>
+                        <Link to='/createEvent'> <li className='font-bold'><a>Create Event</a></li></Link>
                     </ul>
                 </div>
                 <div className='flex items-center gap-1'>
@@ -72,7 +73,8 @@ const Navbar = () => {
                     <Link to="/">
                         <li className='font-bold'><a>Home</a></li>
                     </Link>
-                    <li className='font-bold'><a>Event Pages</a></li>
+                    <Link to="/eventPage"><li className='font-bold'><a>Event Pages</a></li></Link>
+                    <Link to='/createEvent'> <li className='font-bold'><a>Create Event</a></li></Link>
                 </ul>
             </div>
             <div className="navbar-end gap-2">
@@ -104,7 +106,7 @@ const Navbar = () => {
                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                         <li className='font-bold'><a>Book Event </a></li>
                         <li className='font-bold'><a>My Bookings</a></li>
-                       <Link to='/eventmanage'> <li className='font-bold'><a>Manage Events</a></li></Link>
+                        <Link to=''> <li className='font-bold'><a>Manage Events</a></li></Link>
                     </ul>
                 </div>
                 <div>

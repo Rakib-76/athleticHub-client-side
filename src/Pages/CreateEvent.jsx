@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
 
-const EventManage = () => {
+const CreateEvent = () => {
 
     const { user } = useContext(AuthContext);
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -128,4 +128,4 @@ const EventManage = () => {
     );
 };
 
-export default EventManage;
+export default CreateEvent;
