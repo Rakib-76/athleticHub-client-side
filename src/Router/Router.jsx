@@ -8,6 +8,9 @@ import FeaturedEvents from "../Pages/FeaturedEvents";
 import DetailsEvent from "../Pages/DetailsEvent";
 import CreateEvent from "../Pages/CreateEvent";
 import EventPages from "../Pages/EventPages";
+import PrivateRoute from "../providers/PrivateRoute";
+import MyEvents from "../Pages/MyEvents";
+import UpdateEvents from "../Pages/UpdateEvents";
 
 const router = createBrowserRouter([
     {
@@ -29,7 +32,16 @@ const router = createBrowserRouter([
             },
             {
                 path: "/createEvent",
-                Component: CreateEvent
+                element: <PrivateRoute>
+                    <CreateEvent></CreateEvent>
+                </PrivateRoute>
+            },
+              {
+                path: "/myevents",
+                 loader: ({ params }) =>  fetch(`http://localhost:3000/events?email=${params.email}`),
+                element: <PrivateRoute>
+                   <MyEvents></MyEvents>
+                </PrivateRoute>
             },
             {
                 path: "/eventPage",
@@ -40,6 +52,13 @@ const router = createBrowserRouter([
                 path: "/detailsEvent/:id",
                 loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
                 Component: DetailsEvent
+            },
+             {
+                path: "/update-events/:id",
+                 loader: ({ params }) =>  fetch(`http://localhost:3000/events/${params.id}`),
+                element: <PrivateRoute>
+                  <UpdateEvents></UpdateEvents>
+                </PrivateRoute>
             },
         ]
 

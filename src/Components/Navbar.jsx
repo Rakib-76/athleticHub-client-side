@@ -106,7 +106,7 @@ const Navbar = () => {
                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                         <li className='font-bold'><a>Book Event </a></li>
                         <li className='font-bold'><a>My Bookings</a></li>
-                        <Link to=''> <li className='font-bold'><a>Manage Events</a></li></Link>
+                        <Link to='/myevents'> <li className='font-bold'><a>Manage Events</a></li></Link>
                     </ul>
                 </div>
                 <div>
