@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Link, useLoaderData } from 'react-router'; // <-- corrected router import
 
 const FeaturedEvents = () => {
-    const initialGroups = useLoaderData();
-    const [events, setEvents] = useState(initialGroups);
+    const initialEvents = useLoaderData();
+    // const [events, setEvents] = useState(initialEvents);
+    const [showAll, setShowAll] = useState(false);
+    const eventsToShow = showAll ? initialEvents : initialEvents.slice(0, 6);
 
     return (
         <div className="mt-10 p-5">
             <h2 className="text-3xl font-bold mb-6 text-center">Featured Events</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {events.map(event => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                {eventsToShow.map(event => (
                     <div key={event._id} className="card bg-base-100 shadow-xl">
                         <figure>
                             <img src={event.photo} alt={event.name} className="h-48 w-full object-cover" />
@@ -18,7 +20,7 @@ const FeaturedEvents = () => {
                             <h2 className="card-title">{event.name}</h2>
                             <p className="text-sm text-gray-600">Category: {event.category}</p>
                             <div className="card-actions justify-end">
-                                <Link to={`/detailsGroup/${event._id}`}>
+                                <Link to={`/detailsEvent/${event._id}`}>
                                     <button className="btn btn-neutral">See More</button>
                                 </Link>
                             </div>
@@ -26,6 +28,18 @@ const FeaturedEvents = () => {
                     </div>
                 ))}
             </div>
+
+            {!showAll && initialEvents.length > 6 && (
+                <div className="text-center mt-6">
+                    <button
+                        className="btn btn-outline btn-primary"
+                        onClick={() => setShowAll(true)}
+                    >
+                        See All Events
+                    </button>
+                </div>
+            )}
+
         </div>
     );
 };

@@ -5,6 +5,7 @@ import Register from "../Components/Register";
 import SignIn from "../Components/SignIn";
 import EventManage from "../Pages/EventManage";
 import FeaturedEvents from "../Pages/FeaturedEvents";
+import DetailsEvent from "../Pages/DetailsEvent";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,12 @@ const router = createBrowserRouter([
             {
                 path: "/eventmanage",
                 Component: EventManage
-            }
+            },
+            {
+                path: "/detailsEvent/:id",
+                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                Component: DetailsEvent
+            },
         ]
 
     },
