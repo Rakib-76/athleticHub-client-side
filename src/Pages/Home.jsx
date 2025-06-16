@@ -2,11 +2,7 @@ import React from 'react';
 import Trainer from './Trainer';
 import Session from './Session';
 import FeaturedEvents from './FeaturedEvents';
-// import FeaturedGroups from './FeatureGroup';
-// import MyGroupsPage from './MyGroup';
-// import FeaturedCard from './FeaturedCard';
-// import MakeYourGroup from '../components/MakeYourGroup';
-// import FIndHobby from '../components/FIndHobby';
+
 
 const Home = () => {
   return (

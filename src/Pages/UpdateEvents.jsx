@@ -2,7 +2,7 @@
 import React, { useState,  useEffect, useContext } from 'react';
 
 import Swal from 'sweetalert2';
-import { useLoaderData } from 'react-router'; 
+import { useLoaderData, useNavigate } from 'react-router'; 
 import { AuthContext } from '../providers/AuthContext';
 
 const UpdateEvents = () => {
@@ -12,6 +12,8 @@ const UpdateEvents = () => {
     const categoryOptions =["Swimming", "Sprinting", "Long Jump", "High Jump", "Running", "Hurdle race"]
 
     const [selectedCategory, setSelectedCategory] = useState('');
+    const navigate = useNavigate();
+
 
     
     useEffect(() => {
@@ -44,6 +46,7 @@ const UpdateEvents = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate('/myevents');
             }
         });
     };

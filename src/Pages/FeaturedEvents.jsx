@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useLoaderData } from 'react-router'; // <-- corrected router import
+import { Link, useLoaderData } from 'react-router'; 
 
 const FeaturedEvents = () => {
     const initialEvents = useLoaderData();
+    // console.log(initialEvents);
     // const [events, setEvents] = useState(initialEvents);
     const [showAll, setShowAll] = useState(false);
     const eventsToShow = showAll ? initialEvents : initialEvents.slice(0, 6);

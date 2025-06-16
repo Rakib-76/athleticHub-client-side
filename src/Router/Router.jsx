@@ -11,6 +11,7 @@ import EventPages from "../Pages/EventPages";
 import PrivateRoute from "../providers/PrivateRoute";
 import MyEvents from "../Pages/MyEvents";
 import UpdateEvents from "../Pages/UpdateEvents";
+import MyBookings from "../Pages/MyBookings";
 
 const router = createBrowserRouter([
     {
@@ -36,11 +37,18 @@ const router = createBrowserRouter([
                     <CreateEvent></CreateEvent>
                 </PrivateRoute>
             },
-              {
+            {
                 path: "/myevents",
-                 loader: ({ params }) =>  fetch(`http://localhost:3000/events?email=${params.email}`),
+                loader: ({ params }) => fetch(`http://localhost:3000/events?email=${params.email}`),
                 element: <PrivateRoute>
-                   <MyEvents></MyEvents>
+                    <MyEvents></MyEvents>
+                </PrivateRoute>
+            },
+
+             {
+                path: "/my-bookings",
+                element: <PrivateRoute>
+                   <MyBookings></MyBookings>
                 </PrivateRoute>
             },
             {
@@ -53,12 +61,16 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
                 Component: DetailsEvent
             },
-             {
+            {
                 path: "/update-events/:id",
-                 loader: ({ params }) =>  fetch(`http://localhost:3000/events/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
                 element: <PrivateRoute>
-                  <UpdateEvents></UpdateEvents>
+                    <UpdateEvents></UpdateEvents>
                 </PrivateRoute>
+            },
+            {
+                path: "/*",
+                element: <h2 className="text-4xl text-center p-20">Error404</h2>,
             },
         ]
 
