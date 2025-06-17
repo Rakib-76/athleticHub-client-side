@@ -1,21 +1,21 @@
 
-import React, { useState,  useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import Swal from 'sweetalert2';
-import { useLoaderData, useNavigate } from 'react-router'; 
+import { useLoaderData, useNavigate } from 'react-router';
 import { AuthContext } from '../providers/AuthContext';
 
 const UpdateEvents = () => {
     const user = useContext(AuthContext).user;
-    const { _id, name, description, photo, date, category: existingCategory } = useLoaderData();
+    const { _id, name, description, photo, date,locate,category: existingCategory } = useLoaderData();
 
-    const categoryOptions =["Swimming", "Sprinting", "Long Jump", "High Jump", "Running", "Hurdle race"]
+    const categoryOptions = ["Swimming", "Sprinting", "Long Jump", "High Jump", "Running", "Hurdle race"]
 
     const [selectedCategory, setSelectedCategory] = useState('');
     const navigate = useNavigate();
 
 
-    
+
     useEffect(() => {
         setSelectedCategory(existingCategory || '');
     }, [existingCategory]);
@@ -36,23 +36,23 @@ const UpdateEvents = () => {
             },
             body: JSON.stringify(updateGroup)
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.modifiedCount) {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Updated successfully.",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate('/myevents');
-            }
-        });
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Updated successfully.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate('/myevents');
+                }
+            });
     };
 
     return (
-         <div className='mt-10 p-10'>
+        <div className='mt-10 p-10'>
             <h1 className='text-5xl font-bold text-center'>Update a event</h1>
 
             <form onSubmit={handleUpdateEvents}>
@@ -92,7 +92,22 @@ const UpdateEvents = () => {
                     <div className="card-body">
                         <fieldset className="fieldset">
                             <label className="font-bold">Event Date</label>
-                            <input type="date" className="input w-full" name="date"  defaultValue={date}/>
+                            <input type="date" className="input w-full" name="date" defaultValue={date} />
+                        </fieldset>
+                    </div>
+                    
+                    <div className="card-body">
+                        <fieldset className="fieldset">
+                            <label className="font-bold">Meeting Location</label>
+                            <input type="text" className="input w-full" name="location" defaultValue={locate} />
+                        </fieldset>
+                    </div>
+
+
+                     <div className="card-body">
+                        <fieldset className="fieldset">
+                            <label className="font-bold">Image URL</label>
+                            <input type="text" className="input w-full" placeholder="Photo URL" name="photo" defaultValue={photo} />
                         </fieldset>
                     </div>
 
@@ -109,14 +124,10 @@ const UpdateEvents = () => {
                             <input type="email" className="input w-full" name="email" value={user?.email || ''} />
                         </fieldset>
                     </div>
+
                 </div>
 
-                <div className="card-body">
-                    <fieldset className="fieldset">
-                        <label className="font-bold">Image URL</label>
-                        <input type="text" className="input w-full" placeholder="Photo URL" name="photo" defaultValue={photo} />
-                    </fieldset>
-                </div>
+
 
                 <button className="btn btn-neutral mt-4 w-full">Update</button>
             </form>
