@@ -4,8 +4,8 @@ import Lottie from 'lottie-react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
-// import { toast, ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import SocialLogin from '../Share/SocialLogin';
+
 
 const SignIn = () => {
     const { signIn } = use(AuthContext);
@@ -28,11 +28,7 @@ const SignIn = () => {
                 });
                 Navigate("/")
 
-                // We should not use here toastify alert because navigate is so fast that rederect to home before showing toastify alert.So we will be use here sweet alert .
-                // toast.success("successfully login")
-                // setTimeout(() => {
-                //     Navigate("/");
-                // }, 1500); // 1500 ms = 1.5 seconds
+                
             })
             .catch((error) => {
                 const errorMessage = error.code;
@@ -44,7 +40,6 @@ const SignIn = () => {
     }
     return (
         <div className="max-w-4xl mx-auto ">
-            {/* <ToastContainer></ToastContainer> */}
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className='lg:text-left'>
                     <Lottie style={{ width: '300px' }} animationData={lottieSignIn} loop={true}></Lottie>
@@ -64,6 +59,7 @@ const SignIn = () => {
                                 <p className='font-bold text-center mt-4 text-accent'>Dont’t Have An Account ? <Link to='/register' className=' underline text-red-800 '>Register</Link></p>
                             </fieldset>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
