@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link, useLoaderData } from 'react-router'; // <-- corrected router import
+import { Link, useLoaderData } from 'react-router';
+
+
+const Spinner = () => (
+    <div className="flex justify-center items-center min-h-[200px]">
+        <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+    </div>
+);
+
 
 const EventPages = () => {
     const initialEvents = useLoaderData();
-    // const [events, setEvents] = useState(initialEvents);
+    const [loading, setLoading] = useState(true);
+
+      useEffect(() => {
+         
+            const timer = setTimeout(() => setLoading(false), 1000);
+            return () => clearTimeout(timer);
+        }, []);
+    
+        if (loading) return <Spinner />;
+    
 
 
 

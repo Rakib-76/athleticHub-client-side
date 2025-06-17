@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
-import { Link, useLoaderData } from 'react-router'; 
+import React, { useState, useEffect } from 'react';
+import { Link, useLoaderData } from 'react-router'; // ← corrected router import
+
+const Spinner = () => (
+    <div className="flex justify-center items-center min-h-[200px]">
+        <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+    </div>
+);
 
 const FeaturedEvents = () => {
     const initialEvents = useLoaderData();
-    // console.log(initialEvents);
-    // const [events, setEvents] = useState(initialEvents);
     const [showAll, setShowAll] = useState(false);
+    const [loading, setLoading] = useState(true);
+
     const eventsToShow = showAll ? initialEvents : initialEvents.slice(0, 6);
+
+    useEffect(() => {
+        
+        const timer = setTimeout(() => setLoading(false), 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) return <Spinner />;
 
     return (
         <div className="mt-10 p-5">
@@ -40,7 +54,6 @@ const FeaturedEvents = () => {
                     </button>
                 </div>
             )}
-
         </div>
     );
 };
