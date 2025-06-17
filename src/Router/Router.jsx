@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                loader: () => fetch('http://localhost:3000/events'),
+                loader: () => fetch('https://eleventh-assignment-code-server.vercel.app/events'),
                 Component: Home
             },
             {
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/myevents",
-                loader: ({ params }) => fetch(`http://localhost:3000/events?email=${params.email}`),
+                // loader: ({ params }) => fetch(`https://eleventh-assignment-code-server.vercel.app/events?email=${params.email}`),
                 element: <PrivateRoute>
                     <MyEvents></MyEvents>
                 </PrivateRoute>
@@ -53,17 +53,17 @@ const router = createBrowserRouter([
             },
             {
                 path: "/eventPage",
-                loader: () => fetch('http://localhost:3000/events'),
+                loader: () => fetch('https://eleventh-assignment-code-server.vercel.app/events'),
                 Component: EventPages
             },
             {
                 path: "/detailsEvent/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                loader: ({ params }) => fetch(`https://eleventh-assignment-code-server.vercel.app/events/${params.id}`),
                 Component: DetailsEvent
             },
             {
                 path: "/update-events/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                loader: ({ params }) => fetch(`https://eleventh-assignment-code-server.vercel.app/events/${params.id}`),
                 element: <PrivateRoute>
                     <UpdateEvents></UpdateEvents>
                 </PrivateRoute>

@@ -29,7 +29,7 @@ const UpdateEvents = () => {
         updateGroup.category = selectedCategory;
         console.log(updateGroup);
 
-        fetch(`http://localhost:3000/events/${_id}`, {
+        fetch(`https://eleventh-assignment-code-server.vercel.app/events/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

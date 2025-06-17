@@ -2,11 +2,16 @@ import React from 'react';
 import Trainer from './Trainer';
 import Session from './Session';
 import FeaturedEvents from './FeaturedEvents';
+import { Helmet } from 'react-helmet';
 
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
+
       <section>
         <div className="carousel w-full">
           <div id="slide1" className="carousel-item relative w-full">
@@ -46,8 +51,8 @@ const Home = () => {
 
 
       <section>
-          <Trainer></Trainer>
-      
+        <Trainer></Trainer>
+
       </section>
 
       <section>

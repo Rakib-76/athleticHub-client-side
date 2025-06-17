@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useLoaderData } from 'react-router'; // <-- corrected router import
 
 const EventPages = () => {
     const initialEvents = useLoaderData();
     // const [events, setEvents] = useState(initialEvents);
-   
+
 
 
     return (
         <div className="mt-10 p-5">
+            <Helmet>
+                <title>Featured-Events</title>
+            </Helmet>
+
             <h2 className="text-3xl font-bold mb-6 text-center">Featured Events</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                 {initialEvents.map(event => (

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const MyBookings = () => {
     const { user } = useContext(AuthContext);
@@ -10,7 +11,7 @@ const MyBookings = () => {
     useEffect(() => {
         if (user?.email) {
             const email = user.email.toLowerCase();
-            fetch(`http://localhost:3000/bookings?email=${email}`)
+            fetch(`https://eleventh-assignment-code-server.vercel.app/bookings?email=${email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setBookings(data);
@@ -24,6 +25,7 @@ const MyBookings = () => {
     }, [user]);
 
 
+
     const handleDeleteBooking = (_id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -35,7 +37,7 @@ const MyBookings = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/bookings/${_id}`, {
+                fetch(`https://eleventh-assignment-code-server.vercel.app/bookings/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -50,10 +52,16 @@ const MyBookings = () => {
         });
     };
 
-
+    if (bookings.length === 0) {
+        return <p className="text-center mt-10 text-gray-500">No bookings found.</p>;
+    }
 
     return (
         <div className="p-6">
+
+            <Helmet>
+                <title>My-Bookings</title>
+            </Helmet>
             <h2 className="text-3xl font-bold text-center mb-8">My Bookings</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {bookings.map((booking) => (

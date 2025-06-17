@@ -24,7 +24,7 @@ const DetailsEvent = () => {
 
     const bookingData = { ...event, user_email: user.email };
 
-    fetch('http://localhost:3000/bookings', {
+    fetch('https://eleventh-assignment-code-server.vercel.app/bookings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

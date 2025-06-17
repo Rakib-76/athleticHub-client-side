@@ -1,10 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { Link, useLoaderData } from 'react-router';
+import { AuthContext } from '../providers/AuthContext';
+import { Helmet } from 'react-helmet';
 
 const MyEvents = () => {
-    const loadedEvents = useLoaderData();
-    const [events, setEvents] = useState(loadedEvents);
+    const { user } = useContext(AuthContext);
+    // const loadedEvents = useLoaderData();
+    // const [events, setEvents] = useState(loadedEvents);
+    const [events, setEvents] = useState([]);
+
+
+
+    useEffect(() => {
+        if (user?.email) {
+            const email = user.email.toLowerCase();
+            fetch(`https://eleventh-assignment-code-server.vercel.app/my-events/?email=${email}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setEvents(data);
+                    // setLoading(false);
+                })
+                .catch((err) => {
+                    console.error('Error fetching events', err);
+                    // setLoading(false);
+                });
+        }
+    }, [user]);
 
     const handleDeleteEvent = (_id) => {
         Swal.fire({
@@ -17,7 +39,7 @@ const MyEvents = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/events/${_id}`, {
+                fetch(`https://eleventh-assignment-code-server.vercel.app/events/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -34,7 +56,10 @@ const MyEvents = () => {
 
     return (
         <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">My Created Events</h2>
+            <Helmet>
+                <title>My-Bookings</title>
+            </Helmet>
+            <h2 className="text-xl font-bold mb-4 text-center">My Created Events</h2>
             <table className="w-full table-auto border-collapse border border-gray-300">
                 <thead>
                     <tr className="bg-gray-100">

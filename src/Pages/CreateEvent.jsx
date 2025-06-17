@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const CreateEvent = () => {
 
@@ -10,7 +11,7 @@ const CreateEvent = () => {
     const category = ["Swimming", "Sprinting", "Long Jump", "High Jump", "Running", "Hurdle race"]
 
 
-        const handleCreateEvent = (e) => {
+    const handleCreateEvent = (e) => {
         e.preventDefault();
         const form = e.target;
 
@@ -24,10 +25,10 @@ const CreateEvent = () => {
             photo: form.photo.value
         };
 
-             console.log(groupData);
+        console.log(groupData);
 
 
-               fetch('http://localhost:3000/events', {
+        fetch('https://eleventh-assignment-code-server.vercel.app/events', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -57,6 +58,9 @@ const CreateEvent = () => {
 
     return (
         <div className='mt-10 p-10'>
+            <Helmet>
+                <title>Create-Events</title>
+            </Helmet>
             <h1 className='text-5xl font-bold text-center'>Create a event</h1>
 
             <form onSubmit={handleCreateEvent}>
