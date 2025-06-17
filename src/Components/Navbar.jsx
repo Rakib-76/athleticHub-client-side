@@ -31,11 +31,6 @@ const Navbar = () => {
 
             })
     }
-    // const links = <>
-    //     <li><a className='font-bold'>Home</a></li>
-    //     <li><a className='font-bold'>Events Page</a></li>
-    // </>
-
 
     return (
         <div className="navbar mt-5 max-w-8xl mx-auto">

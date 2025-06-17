@@ -22,7 +22,8 @@ const CreateEvent = () => {
             date: form.date.value,
             username: form.username.value,
             email: form.email.value,
-            photo: form.photo.value
+            photo: form.photo.value,
+            locate: form.location.value
         };
 
         console.log(groupData);
@@ -106,6 +107,21 @@ const CreateEvent = () => {
 
                     <div className="card-body">
                         <fieldset className="fieldset">
+                            <label className="font-bold">Meeting-Location</label>
+                            <input type="text" className="input w-full" name="location" />
+                        </fieldset>
+                    </div>
+
+
+                    <div className="card-body">
+                        <fieldset className="fieldset">
+                            <label className="font-bold">Image URL</label>
+                            <input type="text" className="input w-full" placeholder="Photo URL" name="photo" />
+                        </fieldset>
+                    </div>
+
+                    <div className="card-body">
+                        <fieldset className="fieldset">
                             <label className="font-bold">User Name</label>
                             <input type="text" className="input w-full" name="username" value={user?.displayName || ''} />
                         </fieldset>
@@ -117,15 +133,9 @@ const CreateEvent = () => {
                             <input type="email" className="input w-full" name="email" value={user?.email || ''} />
                         </fieldset>
                     </div>
-                </div>
 
-                <div className="card-body">
-                    <fieldset className="fieldset">
-                        <label className="font-bold">Image URL</label>
-                        <input type="text" className="input w-full" placeholder="Photo URL" name="photo" />
-                    </fieldset>
-                </div>
 
+                </div>
                 <button className="btn btn-neutral mt-4 w-full">Create</button>
             </form>
         </div>
@@ -133,3 +143,4 @@ const CreateEvent = () => {
 };
 
 export default CreateEvent;
+

@@ -3,7 +3,7 @@ import Lottie from 'lottie-react';
 import React, { useContext, useState } from 'react';
 import registerLottie from "../../assets/register.json"
 import { AuthContext } from '../providers/AuthContext';
-import { Link, useNavigate} from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 
 
@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 const Register = () => {
     const { createUser, setUser, updateUser } = useContext(AuthContext);
     const [error, setError] = useState("");
-    // console.log(createUser);
     const navigate = useNavigate();
     const handleRegister = e => {
         e.preventDefault();
@@ -43,15 +42,14 @@ const Register = () => {
 
         createUser(email, password)
             .then((result) => {
-                // Signed up 
                 const user = result.user;
                 updateUser({ displayName: name, photoURL: photo })
                     .then(() => {
-                         setUser({ ...user, displayName: name, photoURL: photo });
-                         console.log("Navigating to home...");
-                        //  navigate("/");
+                        setUser({ ...user, displayName: name, photoURL: photo });
+                        console.log("Navigating to home...");
+
                     })
-                // setUser(user);    
+
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -59,14 +57,12 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                 navigate("/");
-                 setUser(user);  
+                navigate("/");
+                setUser(user);
             })
             .catch((error) => {
-                // const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorMessage)
-                // ..
             });
     }
 

@@ -15,7 +15,7 @@ const FeaturedEvents = () => {
     const eventsToShow = showAll ? initialEvents : initialEvents.slice(0, 6);
 
     useEffect(() => {
-        
+
         const timer = setTimeout(() => setLoading(false), 1000);
         return () => clearTimeout(timer);
     }, []);
@@ -34,6 +34,7 @@ const FeaturedEvents = () => {
                         <div className="card-body">
                             <h2 className="card-title">{event.name}</h2>
                             <p className="text-sm text-gray-600">Category: {event.category}</p>
+                            <p className="text-sm text-gray-600">Location: {event.locate}</p>
                             <div className="card-actions justify-end">
                                 <Link to={`/detailsEvent/${event._id}`}>
                                     <button className="btn btn-neutral">See More</button>

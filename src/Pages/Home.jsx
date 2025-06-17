@@ -59,7 +59,6 @@ const Home = () => {
         <Session></Session>
       </section>
       <section>
-        {/* <FIndHobby></FIndHobby> */}
       </section>
 
     </div>

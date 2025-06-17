@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useLoaderData } from 'react-router'; 
+import { useLoaderData } from 'react-router';
 import { AuthContext } from '../providers/AuthContext';
 
 const Spinner = () => (
@@ -21,6 +21,7 @@ const DetailsEvent = () => {
     photo,
     username,
     email,
+    locate
   } = event;
 
   const handleBookNow = () => {
@@ -31,7 +32,7 @@ const DetailsEvent = () => {
 
     const bookingData = { ...event, user_email: user.email };
 
-    setBookingLoading(true); 
+    setBookingLoading(true);
 
     fetch('https://eleventh-assignment-code-server.vercel.app/bookings', {
       method: 'POST',
@@ -49,7 +50,7 @@ const DetailsEvent = () => {
         console.error("Booking error:", err);
         alert("This event is already Booked");
       })
-      .finally(() => setBookingLoading(false)); 
+      .finally(() => setBookingLoading(false));
   };
 
   return (
@@ -68,6 +69,7 @@ const DetailsEvent = () => {
         <p><span className="font-bold">Username:</span> {username}</p>
         <p><span className="font-bold">Email:</span> {email}</p>
         <p><span className="font-bold">Date:</span> {date}</p>
+        <p><span className="font-bold">Location:</span> {locate}</p>
         <div className="card-actions mt-4">
           <button
             className="btn btn-primary"
@@ -78,7 +80,7 @@ const DetailsEvent = () => {
           </button>
         </div>
 
-       
+
         {bookingLoading && <Spinner />}
       </div>
     </div>

@@ -77,7 +77,7 @@ const MyBookings = () => {
       ) : bookings.length === 0 ? (
         <p className="text-center text-gray-500">No bookings found.</p>
       ) : viewMode === "table" ? (
-        // ✅ Table View
+
         <div className="overflow-x-auto">
           <table className="table w-full border border-gray-200">
             <thead className="bg-gray-100 text-left">
@@ -118,7 +118,7 @@ const MyBookings = () => {
           </table>
         </div>
       ) : (
-        // ✅ Card View
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {bookings.map((booking) => (
             <div key={booking._id} className="card bg-base-100 shadow-xl">

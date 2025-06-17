@@ -39,7 +39,6 @@ const router = createBrowserRouter([
             },
             {
                 path: "/myevents",
-                // loader: ({ params }) => fetch(`https://eleventh-assignment-code-server.vercel.app/events?email=${params.email}`),
                 element: <PrivateRoute>
                     <MyEvents></MyEvents>
                 </PrivateRoute>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import { Link, useLoaderData } from 'react-router';
+import { Link } from 'react-router';
 import { AuthContext } from '../providers/AuthContext';
 import { Helmet } from 'react-helmet';
 

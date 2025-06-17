@@ -20,7 +20,6 @@ const EventPages = () => {
 
     if (loading) return <Spinner />;
 
-    // Filter events by name or location (case-insensitive)
     const filteredEvents = initialEvents.filter(event =>
         event.name.toLowerCase().includes(searchText.toLowerCase()) ||
         event.location?.toLowerCase().includes(searchText.toLowerCase())
@@ -45,7 +44,6 @@ const EventPages = () => {
                 />
             </div>
 
-            {/* Events Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                 {filteredEvents.length > 0 ? (
                     filteredEvents.map(event => (
@@ -56,7 +54,7 @@ const EventPages = () => {
                             <div className="card-body">
                                 <h2 className="card-title">{event.name}</h2>
                                 <p className="text-sm text-gray-600">Category: {event.category}</p>
-                                <p className="text-sm text-gray-500">Location: {event.location || 'Not specified'}</p>
+                                <p className="text-sm text-gray-500">Location: {event.locate || 'Not specified'}</p>
                                 <div className="card-actions justify-end">
                                     <Link to={`/detailsEvent/${event._id}`}>
                                         <button className="btn btn-neutral">See More</button>
