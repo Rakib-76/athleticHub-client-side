@@ -13,6 +13,7 @@ const MyBookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [viewMode, setViewMode] = useState("table"); 
 
   useEffect(() => {
     if (user?.email) {
@@ -61,13 +62,22 @@ const MyBookings = () => {
       <Helmet>
         <title>My-Bookings</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center mb-8">My Bookings</h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-3xl font-bold">My Bookings</h2>
+        <button
+          className="btn btn-sm"
+          onClick={() => setViewMode(viewMode === "table" ? "card" : "table")}
+        >
+          Switch to {viewMode === "table" ? "Card" : "Table"} View
+        </button>
+      </div>
 
       {loading ? (
         <Spinner />
       ) : bookings.length === 0 ? (
         <p className="text-center text-gray-500">No bookings found.</p>
-      ) : (
+      ) : viewMode === "table" ? (
+        // ✅ Table View
         <div className="overflow-x-auto">
           <table className="table w-full border border-gray-200">
             <thead className="bg-gray-100 text-left">
@@ -106,6 +116,33 @@ const MyBookings = () => {
               ))}
             </tbody>
           </table>
+        </div>
+      ) : (
+        // ✅ Card View
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {bookings.map((booking) => (
+            <div key={booking._id} className="card bg-base-100 shadow-xl">
+              <figure>
+                <img
+                  src={booking.photo}
+                  alt={booking.name}
+                  className="h-48 w-full object-cover"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">{booking.name}</h2>
+                <p className="text-sm text-gray-600">Category: {booking.category}</p>
+                <p className="text-sm text-gray-600">Date: {booking.date}</p>
+                <p className="text-sm text-gray-600">Booked by: {booking.user_email}</p>
+                <button
+                  className="btn"
+                  onClick={() => handleDeleteBooking(booking._id)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

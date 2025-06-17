@@ -47,7 +47,7 @@ const DetailsEvent = () => {
       })
       .catch(err => {
         console.error("Booking error:", err);
-        alert("Something went wrong.");
+        alert("This event is already Booked");
       })
       .finally(() => setBookingLoading(false)); 
   };
