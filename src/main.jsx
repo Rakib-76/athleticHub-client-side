@@ -15,4 +15,3 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 )
  
-// bg-gradient-to-r from-[#8e2d32] to-[#232459]
