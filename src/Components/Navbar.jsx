@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router'; // use react-router-dom not react-router
 import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
-import { FaUserCircle } from "react-icons/fa";
+import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
@@ -45,9 +45,9 @@ const Navbar = () => {
                             <li className='font-bold'><a>Event Pages</a></li>
                         </Link>
 
-                    {
-                        user && (
-                            <>
+                        {
+                            user && (
+                                <>
                                     <Link to='/createEvent'>
                                         <li className='font-bold'><a>Create Event</a></li>
                                     </Link>
@@ -57,13 +57,26 @@ const Navbar = () => {
                                     <Link to='/myevents'>
                                         <li className='font-bold'><a>Manage Events</a></li>
                                     </Link>
-                            </>
-                        )
-                    }
-                     </ul>
+                                    <li
+                                        className="p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2 text-red-600 font-semibold"
+                                        onClick={handleSignOut}
+                                    >
+                                        <FaSignOutAlt /> Logout
+                                    </li>
+                                </>
+                            )
+                        }
+                        {user ? (
+                            <button className='btn btn-primary px-10 hidden lg:block md:block' onClick={handleSignOut}>LogOut</button>
+                        ) : (
+                            <Link to='/login'>
+                                <button className='btn btn-primary'>Login</button>
+                            </Link>
+                        )}
+                    </ul>
                 </div>
                 <div className='flex items-center gap-1'>
-                    <img src="https://i.postimg.cc/PrGWb7wM/athletics.png" alt="cube" className='w-10 h-10' />
+                    <img src="https://i.postimg.cc/PrGWb7wM/athletics.png" alt="cube" className='w-10 h-10 hidden lg:block md:block' />
                     <a className="btn btn-ghost text-xl font-bold -m-4">
                         <span className='text-red-600 text-xl'>Athletix</span><span className='text-blue-700'>Hub</span>
                     </a>
@@ -116,7 +129,7 @@ const Navbar = () => {
                 </div>
 
                 {user ? (
-                    <button className='btn btn-primary px-10' onClick={handleSignOut}>LogOut</button>
+                    <button className='btn btn-primary px-10 hidden lg:block md:block' onClick={handleSignOut}>LogOut</button>
                 ) : (
                     <Link to='/login'>
                         <button className='btn btn-primary'>Login</button>
