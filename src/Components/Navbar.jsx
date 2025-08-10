@@ -33,7 +33,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className="navbar mt-5 max-w-8xl mx-auto">
+        <div className="navbar mt-5 max-w-8xl mx-auto sticky top-0 bg-white z-50 rounded-xl mb-2">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -52,14 +52,6 @@ const Navbar = () => {
                 <div className='flex items-center gap-1'>
 
                     <img src="https://i.postimg.cc/PrGWb7wM/athletics.png" alt="cube" className='w-10 h-10' />
-
-                    {/* <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity }}
-
-                    >
-                        <img src="https://i.postimg.cc/xCY5PF77/athletic-logo-template-design-742173-19710.avif" alt="cube" className='w-10 h-10' />
-                    </motion.div> */}
                     <a className="btn btn-ghost text-xl font-bold -m-4"> <span className='text-red-600 text-xl'>Athletix</span><span className='text-blue-700'>Hub</span></a>
                 </div>
             </div>

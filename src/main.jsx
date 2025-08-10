@@ -8,7 +8,11 @@ import AuthProvider from './providers/AuthProvider.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-       <RouterProvider router={router} />
+       <div className='bg-white min-h-screen'>
+          <RouterProvider router={router} />
+       </div>
     </AuthProvider>
   </StrictMode>,
 )
+ 
+// bg-gradient-to-r from-[#8e2d32] to-[#232459]

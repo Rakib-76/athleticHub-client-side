@@ -65,7 +65,7 @@ const MyBookings = () => {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">My Bookings</h2>
         <button
-          className="btn btn-sm"
+          className="btn btn-sm mr-30 btn-error font-bold"
           onClick={() => setViewMode(viewMode === "table" ? "card" : "table")}
         >
           Switch to {viewMode === "table" ? "Card" : "Table"} View

@@ -24,11 +24,11 @@ const FeaturedEvents = () => {
 
     return (
         <div className="mt-10 p-5">
-            <h2 className="text-3xl font-bold mb-6 text-center">Featured Events</h2>
+            <h2 className="text-6xl font-medium mb-6 text-center">Featured Events</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                 {eventsToShow.map(event => (
-                    <div key={event._id} className="card bg-base-100 shadow-xl">
-                        <figure>
+                    <div key={event._id} className="card bg- shadow-xl">
+                        <figure className='p-5'>
                             <img src={event.photo} alt={event.name} className="h-48 w-full object-cover" />
                         </figure>
                         <div className="card-body">
@@ -37,7 +37,7 @@ const FeaturedEvents = () => {
                             <p className="text-sm text-gray-600">Location: {event.locate}</p>
                             <div className="card-actions justify-end">
                                 <Link to={`/detailsEvent/${event._id}`}>
-                                    <button className="btn btn-neutral">See More</button>
+                                    <button className="btn btn-primary">See More</button>
                                 </Link>
                             </div>
                         </div>

@@ -57,7 +57,7 @@ const EventPages = () => {
                                 <p className="text-sm text-gray-500">Location: {event.locate || 'Not specified'}</p>
                                 <div className="card-actions justify-end">
                                     <Link to={`/detailsEvent/${event._id}`}>
-                                        <button className="btn btn-neutral">See More</button>
+                                        <button className="btn btn-primary">See More</button>
                                     </Link>
                                 </div>
                             </div>
