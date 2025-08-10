@@ -26,115 +26,117 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar mt-5 max-w-8xl mx-auto sticky top-0 bg-white z-50 rounded-xl mb-2">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
-                    </div>
+        <div className='overflow-visible'>
+            <div className="navbar max-w-8xl mx-auto fixed -top-0.5 z-50 bg-white shadow-md rounded-xl">
+                <div className="navbar-start">
+                    <div className="dropdown">
+                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+                        </div>
 
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            <Link to="/">
+                                <li className='font-bold'><a>Home</a></li>
+                            </Link>
+                            <Link to="/eventPage">
+                                <li className='font-bold'><a>Event Pages</a></li>
+                            </Link>
+
+                            {
+                                user && (
+                                    <>
+                                        <Link to='/createEvent'>
+                                            <li className='font-bold'><a>Create Event</a></li>
+                                        </Link>
+                                        <Link to='/my-bookings'>
+                                            <li className='font-bold'><a>My Bookings</a></li>
+                                        </Link>
+                                        <Link to='/myevents'>
+                                            <li className='font-bold'><a>Manage Events</a></li>
+                                        </Link>
+                                        <li
+                                            className="p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2 text-red-600 font-semibold"
+                                            onClick={handleSignOut}
+                                        >
+                                            <FaSignOutAlt /> Logout
+                                        </li>
+                                    </>
+                                )
+                            }
+                            {user ? (
+                                <button className='btn btn-primary px-10 hidden lg:block md:block' onClick={handleSignOut}>LogOut</button>
+                            ) : (
+                                <Link to='/login'>
+                                    <button className='btn btn-primary'>Login</button>
+                                </Link>
+                            )}
+                        </ul>
+                    </div>
+                    <div className='flex items-center gap-1'>
+                        <img src="https://i.postimg.cc/PrGWb7wM/athletics.png" alt="cube" className='w-10 h-10 hidden lg:block md:block' />
+                        <a className="btn btn-ghost text-xl font-bold -m-4">
+                            <span className='text-red-600 text-xl'>Athletix</span><span className='text-blue-700'>Hub</span>
+                        </a>
+                    </div>
+                </div>
+
+                {/* Center nav links */}
+                <div className="navbar-center hidden lg:flex">
+                    <ul className="menu menu-horizontal px-1 items-center gap-6">
                         <Link to="/">
                             <li className='font-bold'><a>Home</a></li>
                         </Link>
                         <Link to="/eventPage">
                             <li className='font-bold'><a>Event Pages</a></li>
                         </Link>
+                        <Link to='/createEvent'>
+                            <li className='font-bold'><a>Create Event</a></li>
+                        </Link>
 
-                        {
-                            user && (
-                                <>
-                                    <Link to='/createEvent'>
-                                        <li className='font-bold'><a>Create Event</a></li>
-                                    </Link>
-                                    <Link to='/my-bookings'>
-                                        <li className='font-bold'><a>My Bookings</a></li>
-                                    </Link>
-                                    <Link to='/myevents'>
-                                        <li className='font-bold'><a>Manage Events</a></li>
-                                    </Link>
-                                    <li
-                                        className="p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2 text-red-600 font-semibold"
-                                        onClick={handleSignOut}
-                                    >
-                                        <FaSignOutAlt /> Logout
-                                    </li>
-                                </>
-                            )
-                        }
-                        {user ? (
-                            <button className='btn btn-primary px-10 hidden lg:block md:block' onClick={handleSignOut}>LogOut</button>
-                        ) : (
-                            <Link to='/login'>
-                                <button className='btn btn-primary'>Login</button>
-                            </Link>
+                        {user && (
+                            <>
+                                <Link to='/my-bookings'>
+                                    <li className='font-bold'><a>My Bookings</a></li>
+                                </Link>
+                                <Link to='/myevents'>
+                                    <li className='font-bold'><a>Manage Events</a></li>
+                                </Link>
+                            </>
                         )}
                     </ul>
                 </div>
-                <div className='flex items-center gap-1'>
-                    <img src="https://i.postimg.cc/PrGWb7wM/athletics.png" alt="cube" className='w-10 h-10 hidden lg:block md:block' />
-                    <a className="btn btn-ghost text-xl font-bold -m-4">
-                        <span className='text-red-600 text-xl'>Athletix</span><span className='text-blue-700'>Hub</span>
-                    </a>
-                </div>
-            </div>
 
-            {/* Center nav links */}
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 items-center gap-6">
-                    <Link to="/">
-                        <li className='font-bold'><a>Home</a></li>
-                    </Link>
-                    <Link to="/eventPage">
-                        <li className='font-bold'><a>Event Pages</a></li>
-                    </Link>
-                    <Link to='/createEvent'>
-                        <li className='font-bold'><a>Create Event</a></li>
-                    </Link>
+                {/* Right side user avatar & auth buttons */}
+                <div className="navbar-end flex items-center gap-4">
+                    <div className="relative group">
+                        {user && user.photoURL ? (
+                            <img
+                                className="w-10 h-10 rounded-full"
+                                src={user.photoURL}
+                                alt="User"
+                            />
+                        ) : (
+                            <FaUserCircle className="w-10 h-10 text-gray-600" />
+                        )}
+                        {user?.displayName && (
+                            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-200 z-50">
+                                {user.displayName}
+                            </div>
+                        )}
+                    </div>
 
-                    {user && (
-                        <>
-                            <Link to='/my-bookings'>
-                                <li className='font-bold'><a>My Bookings</a></li>
-                            </Link>
-                            <Link to='/myevents'>
-                                <li className='font-bold'><a>Manage Events</a></li>
-                            </Link>
-                        </>
-                    )}
-                </ul>
-            </div>
-
-            {/* Right side user avatar & auth buttons */}
-            <div className="navbar-end flex items-center gap-4">
-                <div className="relative group">
-                    {user && user.photoURL ? (
-                        <img
-                            className="w-10 h-10 rounded-full"
-                            src={user.photoURL}
-                            alt="User"
-                        />
+                    {user ? (
+                        <button className='btn btn-primary px-10 hidden lg:block md:block' onClick={handleSignOut}>LogOut</button>
                     ) : (
-                        <FaUserCircle className="w-10 h-10 text-gray-600" />
-                    )}
-                    {user?.displayName && (
-                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-200 z-50">
-                            {user.displayName}
-                        </div>
+                        <Link to='/login'>
+                            <button className='btn btn-primary'>Login</button>
+                        </Link>
                     )}
                 </div>
-
-                {user ? (
-                    <button className='btn btn-primary px-10 hidden lg:block md:block' onClick={handleSignOut}>LogOut</button>
-                ) : (
-                    <Link to='/login'>
-                        <button className='btn btn-primary'>Login</button>
-                    </Link>
-                )}
             </div>
         </div>
     );
