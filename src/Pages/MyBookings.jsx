@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
+import { FaArrowsRotate } from 'react-icons/fa6';
 
 const Spinner = () => (
   <div className="flex justify-center items-center min-h-[200px]">
@@ -58,17 +59,17 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="mt-20 p-6 lg:mt-20 md:mt-20">
       <Helmet>
         <title>My-Bookings</title>
       </Helmet>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">My Bookings</h2>
         <button
-          className="btn btn-sm mr-30 btn-error font-bold"
+          className="btn btn-sm mr-30 text-white bg-[#3D83B7] font-bold"
           onClick={() => setViewMode(viewMode === "table" ? "card" : "table")}
         >
-          Switch to {viewMode === "table" ? "Card" : "Table"} View
+          <FaArrowsRotate /> Switch to {viewMode === "table" ? "Card" : "Table"} View
         </button>
       </div>
 
@@ -107,7 +108,7 @@ const MyBookings = () => {
                   <td className="border px-4 py-2">
                     <button
                       onClick={() => handleDeleteBooking(booking._id)}
-                      className="btn btn-sm btn-error text-white"
+                      className="btn btn-sm bg-red-600 text-white"
                     >
                       Cancel
                     </button>

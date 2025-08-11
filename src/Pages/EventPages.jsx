@@ -26,7 +26,7 @@ const EventPages = () => {
     );
 
     return (
-        <div className="mt-10 p-5">
+        <div className="mt-10 p-5 lg:mt-20 md:mt-20">
             <Helmet>
                 <title>Featured-Events</title>
             </Helmet>

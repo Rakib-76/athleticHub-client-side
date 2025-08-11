@@ -39,7 +39,7 @@ const SignIn = () => {
 
     }
     return (
-        <div className="max-w-4xl mx-auto ">
+        <div className="max-w-4xl mx-auto mt-5 lg:mt-20 md:mt-20">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className='lg:text-left'>
                     <Lottie style={{ width: '300px' }} animationData={lottieSignIn} loop={true}></Lottie>
