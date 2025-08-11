@@ -4,6 +4,7 @@ import Session from './Session';
 import FeaturedEvents from './FeaturedEvents';
 import { Helmet } from 'react-helmet';
 import Banner from './Banner';
+import StatsSection from './StatsSection';
 
 
 const Home = () => {
@@ -32,6 +33,7 @@ const Home = () => {
         <Session></Session>
       </section>
       <section>
+        <StatsSection></StatsSection>
       </section>
 
     </div>
