@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import lottieSignIn from '../../assets/Sign_In.json'
 import Lottie from 'lottie-react';
 import { Link, useNavigate } from 'react-router';
@@ -9,7 +9,9 @@ import SocialLogin from '../Share/SocialLogin';
 
 const SignIn = () => {
     const { signIn } = use(AuthContext);
-    const Navigate = useNavigate()
+    const Navigate = useNavigate();
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -28,14 +30,23 @@ const SignIn = () => {
                 });
                 Navigate("/")
 
-                
+
             })
             .catch((error) => {
-                const errorMessage = error.code;
-                console.log(errorMessage);
+                // Reset errors first
+                setEmailError('');
+                setPasswordError('');
 
-            })
-
+                // Firebase auth error codes for email or password errors
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-email') {
+                    setEmailError('Invalid or unregistered email address');
+                } else if (error.code === 'auth/wrong-password') {
+                    setPasswordError('Incorrect password');
+                } else {
+                    // generic error fallback
+                    setEmailError('Login failed. Please try again.');
+                }
+            });
 
     }
     return (
@@ -47,19 +58,25 @@ const SignIn = () => {
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
 
                     <div className="card-body">
-                        <form onSubmit={handleSignIn}>
-
+                        <form onSubmit={handleSignIn} noValidate>
                             <fieldset className="fieldset">
                                 <label className="label">Email</label>
                                 <input type="email" className="input" placeholder="Email" name='email' />
+                                {emailError && <p className="text-red-600 text-sm mt-1">{emailError}</p>}
+
                                 <label className="label">Password</label>
                                 <input type="password" className="input" placeholder="Password" name="password" />
+                                {passwordError && <p className="text-red-600 text-sm mt-1">{passwordError}</p>}
+
                                 <div><a className="link link-hover">Forgot password?</a></div>
+
                                 <button className="btn btn-neutral mt-4">SignIn</button>
-                                <p className='font-bold text-center mt-4 text-accent'>Dont’t Have An Account ? <Link to='/register' className=' underline text-red-800 '>Register</Link></p>
+                                <p className='font-bold text-center mt-4 text-accent'>
+                                    Don’t Have An Account ? <Link to='/register' className='underline text-red-800'>Register</Link>
+                                </p>
                             </fieldset>
                         </form>
-                        <SocialLogin></SocialLogin>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>

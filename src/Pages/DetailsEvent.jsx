@@ -54,7 +54,7 @@ const DetailsEvent = () => {
   };
 
   return (
-    <div className="card bg-base-100 max-w-96 mx-auto shadow-sm">
+    <div className="card bg-base-100 max-w-96 mx-auto shadow-sm mt-20">
       <figure className="px-10 pt-10">
         <img
           src={photo}

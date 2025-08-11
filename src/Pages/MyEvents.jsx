@@ -58,7 +58,7 @@ const MyEvents = () => {
     };
 
     return (
-        <div className="p-4">
+        <div className="p-4 mt-20">
             <Helmet>
                 <title>My-Events</title>
             </Helmet>
@@ -79,9 +79,9 @@ const MyEvents = () => {
                                 <p><span className="font-semibold">Date:</span> {event.date}</p>
                                 <p><span className="font-semibold">Category:</span> {event.category}</p>
                                 <div className="flex justify-between mt-4">
-                                    <button onClick={() => handleDeleteEvent(event._id)} className="btn btn-error">Delete</button>
+                                    <button onClick={() => handleDeleteEvent(event._id)} className="btn bg-red-600 text-white">Delete</button>
                                     <Link to={`/update-events/${event._id}`}>
-                                        <button className="btn btn-neutral">Update</button>
+                                        <button className="btn bg-[#422ad5] text-white">Update</button>
                                     </Link>
                                 </div>
                             </div>

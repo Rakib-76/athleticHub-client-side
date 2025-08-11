@@ -12,6 +12,7 @@ import PrivateRoute from "../providers/PrivateRoute";
 import MyEvents from "../Pages/MyEvents";
 import UpdateEvents from "../Pages/UpdateEvents";
 import MyBookings from "../Pages/MyBookings";
+import NotFound from "../Pages/NotFound";
 
 const router = createBrowserRouter([
     {
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/*",
-                element: <h2 className="text-4xl text-center p-20">Error404</h2>,
+                Component:NotFound
             },
         ]
 

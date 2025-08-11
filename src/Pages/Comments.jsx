@@ -45,7 +45,7 @@ const Comment = () => {
     return (
         <div className='bg-[#faf8fc] '>
             <div className="max-w-9/12 mx-auto py-10 px-4 mt-10">
-                <h2 className="text-4xl font-medium text-center mb-10">Successful Member Comments</h2>
+                <h2 className="text-4xl font-medium text-center mb-10 dark:text-black">Successful Member Comments</h2>
 
                 {/* Slider Area */}
                 <div className="relative overflow-hidden h-[380px]">

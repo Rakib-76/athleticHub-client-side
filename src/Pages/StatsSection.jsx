@@ -24,7 +24,7 @@ const StatCard = ({ icon, number, suffix, label }) => (
 const StatsSection = () => {
   return (
     <section className="py-12 px-4 text-center">
-      <h2 className="text-4xl font-medium mb-6">
+      <h2 className="text-4xl font-medium mb-6 dark:text-black">
         Our Athletics Arena In Just Numbers
       </h2>
       <p className="text-gray-600 mb-10 max-w-5xl mx-auto">

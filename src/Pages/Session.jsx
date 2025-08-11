@@ -5,12 +5,12 @@ const Session = () => {
     return (
         <div className='mt-10'>
             <div>
-                <h1 className='text-4xl font-medium text-center'>Training Sessions </h1>            
+                <h1 className='text-4xl font-medium text-center pt-10 dark:text-black'>Training Sessions </h1>            
                 <p className='text-gray-600  max-w-9/12 mx-auto mb-5 mt-5 text-center'>Join our high-intensity, coach-led training sessions designed to boost your strength, endurance, and overall fitness. Whether you're a beginner or an experienced athlete, our programs are tailored to help you meet your goals faster and safer.</p>
 
             </div>
 
-            <div className='max-w-8xl max-auto grid lg:grid-cols-2  bg-gradient-to-r from-[#8e2d32] to-[#232459]'>
+            <div className='max-w-8xl max-auto grid lg:grid-cols-2 '>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-2 gap-4 p-10">
                     <img
@@ -37,13 +37,13 @@ const Session = () => {
 
 
                 <div className=' p-5'>
-                    <h1 className='text-4xl text-white mt-5  border-b-2' > Discount up to 50% for merch</h1>
+                    <h1 className='text-4xl mt-5 dark:text-black'> Discount up to 50% for merch</h1>
                     <p className='text-gray-400 max-w-xl mt-5'>Level up your life—one week at a time. Our free weekly course gives you access to curated content, hands-on training, and community support that helps you stay focused and consistent. Learn something new. Grow every week. And best of all—it’s 100% free.</p>
 
-                    <h1 className='text-4xl text-white mt-5  border-b-2' >24/7 Premium Support</h1>
+                    <h1 className='text-4xl  mt-5 dark:text-black ' >24/7 Premium Support</h1>
                     <p className='text-gray-400 max-w-xl mt-5'>Level up your life—one week at a time. Our free weekly course gives you access to curated content, hands-on training, and community support that helps you stay focused and consistent. Learn something new. Grow every week. And best of all—it’s 100% free.</p>
 
-                    <h1 className='text-4xl text-white mt-5  border-b-2' > Free weekly course</h1>
+                    <h1 className='text-4xl  mt-5  dark:text-black' > Free weekly course</h1>
                     <p className='text-gray-400 max-w-xl mt-2'>Level up your life—one week at a time. Our free weekly course gives you access to curated content, hands-on training, and community support that helps you stay focused and consistent. Learn something new. Grow every week. And best of all—it’s 100% free.</p>
                 </div>
             </div>

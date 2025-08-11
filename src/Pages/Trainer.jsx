@@ -3,7 +3,7 @@ import React from 'react';
 const Trainer = () => {
     return (
         <div className='mt-10'>
-                <h1 className=' text-center text-4xl font-medium'>Our top Trainers</h1>
+                <h1 className=' text-center text-4xl font-medium dark:text-black'>Our top Trainers</h1>
                 <p className='text-gray-600 text-center mt-5 max-w-5xl mx-auto'>Our top trainer is a skilled, experienced, and dedicated professional who has been involved in teaching and training for many years. Every session they lead is interactive, insightful, and impactful—preparing learners to face real-world challenges with confidence.</p>
 
             <div className='grid grid-cols-1 lg:grid-cols-4'>
