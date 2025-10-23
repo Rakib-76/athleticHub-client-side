@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 import registerLottie from "../../assets/register.json"
 import { AuthContext } from '../providers/AuthContext';
 import { Link, useNavigate } from 'react-router';
+import { Eye, EyeOff } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 
@@ -12,6 +13,8 @@ const Register = () => {
     const { createUser, setUser, updateUser } = useContext(AuthContext);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+
     const handleRegister = e => {
         e.preventDefault();
 
@@ -92,12 +95,20 @@ const Register = () => {
                             required
                             placeholder="Enter your photo url" />
                         <label className="label">Email</label>
-                        <input
-                            type="email"
-                            className="input  bg-gray-100 border-none"
-                            name='email'
-                            required
-                            placeholder="Email" />
+                        <div className='relative'>
+                            <input type={showPassword ? "text" : "password"}
+                                className="input"
+                                placeholder="Password"
+                                name="password" />
+                            <button
+                                type='button'
+                                onClick={() => setShowPassword(!showPassword)}
+                                className='absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 z-10'
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+
+                        </div>
                         <label className="label">Password</label>
                         <input
                             type="password"

@@ -27,7 +27,7 @@ const MyBookings = () => {
   useEffect(() => {
     if (user?.email) {
       const email = user.email.toLowerCase();
-      fetch(`https://eleventh-assignment-code-server.vercel.app/bookings?email=${email}`)
+      fetch(`http://localhost:3000/p/bookings?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           setBookings(data);
@@ -51,7 +51,7 @@ const MyBookings = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://eleventh-assignment-code-server.vercel.app/bookings/${_id}`, {
+        fetch(` http://localhost:3000//bookings/${_id}`, {
           method: 'DELETE'
         })
           .then(res => res.json())

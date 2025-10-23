@@ -27,9 +27,9 @@ const CreateEvent = () => {
         };
 
         console.log(groupData);
+// https://eleventh-assignment-code-server.vercel.app/events
 
-
-        fetch('https://eleventh-assignment-code-server.vercel.app/events', {
+        fetch('http://localhost:3000//events', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

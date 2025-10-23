@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
 import SocialLogin from '../Share/SocialLogin';
+import { Eye, EyeOff } from 'lucide-react';
 
 
 const SignIn = () => {
@@ -12,6 +13,8 @@ const SignIn = () => {
     const Navigate = useNavigate();
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
     const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -65,9 +68,22 @@ const SignIn = () => {
                                 {emailError && <p className="text-red-600 text-sm mt-1">{emailError}</p>}
 
                                 <label className="label">Password</label>
-                                <input type="password" className="input" placeholder="Password" name="password" />
-                                {passwordError && <p className="text-red-600 text-sm mt-1">{passwordError}</p>}
 
+                                <div className='relative'>
+                                    <input type={showPassword ? "text" : "password"}
+                                        className="input"
+                                        placeholder="Password"
+                                        name="password" />
+                                    <button
+                                        type='button'
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className='absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 z-10'
+                                    >
+                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </button>
+
+                                </div>
+                                {passwordError && <p className="text-red-600 text-sm mt-1">{passwordError}</p>}
                                 <div><a className="link link-hover">Forgot password?</a></div>
 
                                 <button className="btn btn-neutral mt-4">SignIn</button>
