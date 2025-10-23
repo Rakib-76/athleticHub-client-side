@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import Banner from './Banner';
 import StatsSection from './StatsSection';
 import Comment from './Comments';
+import ScrollToTop from '../Components/ScrollToTop';
 
 
 const Home = () => {
@@ -39,7 +40,9 @@ const Home = () => {
       <section>
         <StatsSection></StatsSection>
       </section>
-
+    <section>
+      <ScrollToTop/>
+    </section>
 
     </div>
   );
