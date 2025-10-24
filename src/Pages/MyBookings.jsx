@@ -3,6 +3,8 @@ import { AuthContext } from '../providers/AuthContext';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
 import { FaArrowsRotate } from 'react-icons/fa6';
+// 🚀 TanStack Query Imports
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const Spinner = () => (
   <div className="flex justify-center items-center min-h-[200px]">
@@ -12,33 +14,82 @@ const Spinner = () => (
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
+  
+
   const [viewMode, setViewMode] = useState("table");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  //  TanStack Query Setup
+  const queryClient = useQueryClient();
+  // Unique Query Key for this specific data set
+  const BOOKINGS_QUERY_KEY = ['bookings', user?.email];
+
   useEffect(() => {
-    // Update isMobile on resize
+    // Update isMobile on resize (kept the original window resize logic)
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    if (user?.email) {
+  // 1.USE QUERY: Data Fetching
+  const {
+    data: bookings, // Renamed 'data' to 'bookings'
+    isLoading,    // true while fetching
+    isError,      // true if fetch fails
+  } = useQuery({
+    queryKey: BOOKINGS_QUERY_KEY,
+    queryFn: async () => {
+      // Ensure user exists before fetching
+      if (!user?.email) return [];
       const email = user.email.toLowerCase();
-      fetch(`https://eleventh-assignment-code-server.vercel.app/bookings?email=${email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setBookings(data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error('Error fetching bookings:', err);
-          setLoading(false);
-        });
+
+      const res = await fetch(`https://eleventh-assignment-code-server.vercel.app/bookings?email=${email}`);
+      if (!res.ok) {
+        throw new Error('Failed to fetch bookings');
+      }
+      return res.json();
+    },
+    // Query will only run if user.email exists
+    enabled: !!user?.email,
+  });
+
+
+  // 2.  USE MUTATION: Data Deletion (Cancel Booking)
+  const deleteMutation = useMutation({
+    mutationFn: async (_id) => {
+      const res = await fetch(`https://eleventh-assignment-code-server.vercel.app/bookings/${_id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) {
+        throw new Error('Failed to delete booking');
+      }
+      return res.json();
+    },
+
+    // OPTIMISTIC UPDATE: UI will update immediately
+    onMutate: async (deletedId) => {
+      await queryClient.cancelQueries({ queryKey: BOOKINGS_QUERY_KEY }); // Cancel any ongoing fetch
+      const previousBookings = queryClient.getQueryData(BOOKINGS_QUERY_KEY); // Save current data
+
+      // Optimistically remove the booking from the cache
+      queryClient.setQueryData(BOOKINGS_QUERY_KEY, old => old.filter(b => b._id !== deletedId));
+
+      return { previousBookings }; // Return context for onError
+    },
+
+    // If mutation fails, rollback the cache
+    onError: (err, deletedId, context) => {
+      queryClient.setQueryData(BOOKINGS_QUERY_KEY, context.previousBookings);
+      Swal.fire("Error!", "Failed to cancel booking. Please check your connection.", "error");
+    },
+
+    // Success: show success message
+    onSuccess: () => {
+      Swal.fire("Cancelled!", "Your booking has been successfully cancelled.", "success");
+      // UI already updated in onMutate, no need for manual setBookings()
     }
-  }, [user]);
+  });
+
 
   const handleDeleteBooking = (_id) => {
     Swal.fire({
@@ -51,20 +102,17 @@ const MyBookings = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://eleventh-assignment-code-server.vercel.app/bookings/${_id}`, {
-          method: 'DELETE'
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.deletedCount) {
-              Swal.fire("Deleted!", "Your booking has been deleted.", "success");
-              const remaining = bookings.filter(b => b._id !== _id);
-              setBookings(remaining);
-            }
-          });
+        // 🚀 Call the mutation instead of manual fetch
+        deleteMutation.mutate(_id);
       }
     });
   };
+
+  // Error case handling
+  if (isError) {
+    return <p className="text-center text-red-500 mt-10">Error loading bookings. Please try again.</p>;
+  }
+
 
   return (
     <div className="mt-20 p-6">
@@ -85,12 +133,13 @@ const MyBookings = () => {
         )}
       </div>
 
-      {loading ? (
+      {/* USE loading from useQuery & isPending from useMutation */}
+      {isLoading || deleteMutation.isPending ? (
         <Spinner />
-      ) : bookings.length === 0 ? (
+      ) : bookings?.length === 0 ? ( // Use optional chaining just in case
         <p className="text-center text-gray-500">No bookings found.</p>
       ) : (
-        // If mobile → always card view
+        // ... baki rendering logic ...
         (isMobile || viewMode === "card") ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {bookings.map((booking) => (
@@ -109,9 +158,10 @@ const MyBookings = () => {
                   <p className="text-sm text-gray-600">Booked by: {booking.user_email}</p>
                   <button
                     className="btn bg-red-600 text-white"
+                    disabled={deleteMutation.isPending} // Disable button during mutation
                     onClick={() => handleDeleteBooking(booking._id)}
                   >
-                    Cancel
+                    {deleteMutation.isPending ? 'Cancelling...' : 'Cancel'}
                   </button>
                 </div>
               </div>
@@ -148,8 +198,9 @@ const MyBookings = () => {
                       <button
                         onClick={() => handleDeleteBooking(booking._id)}
                         className="btn btn-sm bg-red-600 text-white"
+                        disabled={deleteMutation.isPending} // Disable button during mutation
                       >
-                        Cancel
+                        {deleteMutation.isPending ? 'Cancelling...' : 'Cancel'}
                       </button>
                     </td>
                   </tr>
