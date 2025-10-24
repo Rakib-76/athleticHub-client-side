@@ -10,10 +10,10 @@ const ContactSection = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs.sendForm(
-      'service_wd97pr7',   // EmailJS Service ID
-      'template_2cboo3d',  // EmailJS Template ID
+      'service_wd97pr7',   
+      'template_2cboo3d',  
       form.current,
-      'Psn6q2BKvm8M_0pAh' // EmailJS Public Key / User ID
+      'Psn6q2BKvm8M_0pAh' 
     ).then(
       (result) => {
         alert('Message sent successfully!');
