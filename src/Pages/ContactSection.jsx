@@ -17,7 +17,7 @@ const ContactSection = () => {
     ).then(
       (result) => {
         alert('Message sent successfully!');
-        form.current.reset(); // form reset
+        form.current.reset(); 
       },
       (error) => {
         alert('Failed to send message. Try again.');
