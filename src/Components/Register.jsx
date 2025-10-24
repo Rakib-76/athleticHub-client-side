@@ -1,23 +1,21 @@
-
+// Register.jsx
 import Lottie from 'lottie-react';
 import React, { useContext, useState } from 'react';
 import registerLottie from "../../assets/register.json"
 import { AuthContext } from '../providers/AuthContext';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router'; 
 import { Eye, EyeOff } from 'lucide-react';
 import Swal from 'sweetalert2';
-
-
 
 const Register = () => {
     const { createUser, setUser, updateUser } = useContext(AuthContext);
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
     const handleRegister = e => {
         e.preventDefault();
-
 
         const form = e.target;
         const name = form.name.value;
@@ -41,31 +39,70 @@ const Register = () => {
             return;
         }
 
-        setError("")
+        setError("");
+        setIsLoading(true); // start loading when user clicks Register
 
         createUser(email, password)
             .then((result) => {
                 const user = result.user;
+
+                // update profile then set user and navigate
                 updateUser({ displayName: name, photoURL: photo })
                     .then(() => {
-                        setUser({ ...user, displayName: name, photoURL: photo });
-                        console.log("Navigating to home...");
+                        // setUser might not exist in context — guard it
+                        try {
+                            if (typeof setUser === "function") {
+                                setUser({ ...user, displayName: name, photoURL: photo });
+                            }
+                        } catch (e) {
+                            // ignore if provider doesn't expose setUser
+                        }
 
+                        // success alert
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Registration Successful",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // navigate after short delay so user sees toast
+                        setTimeout(() => {
+                            setIsLoading(false);
+                            navigate("/");
+                        }, 600);
                     })
+                    .catch((updErr) => {
+                        console.error("Update profile error:", updErr);
+                        setIsLoading(false);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Profile update failed",
+                            text: updErr.message || "Could not update profile."
+                        });
+                    });
 
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Registration Successfully.",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate("/");
-                setUser(user);
             })
             .catch((error) => {
-                const errorMessage = error.message;
-                console.log(errorMessage)
+                console.error("Registration error:", error);
+                setIsLoading(false);
+
+                // Firebase auth specific error code for email already in use
+                if (error?.code === "auth/email-already-in-use" || error?.message?.includes("already in use")) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "User already exists",
+                        text: "An account with this email already exists. Try logging in or reset your password.",
+                    });
+                } else {
+                    // generic error alert
+                    Swal.fire({
+                        icon: "error",
+                        title: "Registration failed",
+                        text: error.message || "Something went wrong during registration.",
+                    });
+                }
             });
     }
 
@@ -73,7 +110,7 @@ const Register = () => {
     return (
         <div className='flex justify-center items-center mt-20'>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl flex justify-center py-4 z-0 ">
-
+                <h1 className='text-4xl font-bold p-4'>Register!</h1>
                 <div className='lg:text-left'>
                     <Lottie style={{ width: '200px' }} animationData={registerLottie} loop={true}></Lottie>
                 </div>
@@ -95,6 +132,13 @@ const Register = () => {
                             required
                             placeholder="Enter your photo url" />
                         <label className="label">Email</label>
+                        <input
+                            type="email"
+                            className="input bg-gray-100 border-none"
+                            name='email'
+                            required
+                            placeholder="Enter your email" />
+                        <label className="label">Password</label>
                         <div className='relative'>
                             <input type={showPassword ? "text" : "password"}
                                 className="input"
@@ -107,27 +151,23 @@ const Register = () => {
                             >
                                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>
-
                         </div>
-                        <label className="label">Password</label>
-                        <input
-                            type="password"
-                            className="input bg-gray-100 border-none"
-                            name='password'
-                            required
-                            placeholder="Password" />
 
                         {error && <p className="text-red-600 mt-2 font-medium">{error}</p>}
 
                         <div>Accept Term & Conditions</div>
 
-
                         <button
-
                             type='submit'
-                            className="btn bg-[#403f3f] mt-4 text-white">Register</button>
-                        <p
-                            className='font-bold text-center mt-4 text-accent'>Already Have An Account ? <Link to='/login' className=' underline text-red-800 '>Login</Link></p>
+                            className="btn bg-[#403f3f] mt-4 text-white"
+                            disabled={isLoading} 
+                        >
+                            {isLoading ? "Registering..." : "Register"}
+                        </button>
+
+                        <p className='font-bold text-center mt-4 text-accent'>
+                            Already Have An Account ? <Link to='/login' className=' underline text-red-800 '>Login</Link>
+                        </p>
                     </fieldset>
                 </form>
             </div>
@@ -136,5 +176,3 @@ const Register = () => {
 };
 
 export default Register;
-
-

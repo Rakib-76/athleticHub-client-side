@@ -36,7 +36,7 @@ const DetailsEvent = () => {
 
 // https://eleventh-assignment-code-server.vercel.app
 
-    fetch('http://localhost:3000//bookings', {
+    fetch('https://eleventh-assignment-code-server.vercel.app/bookings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

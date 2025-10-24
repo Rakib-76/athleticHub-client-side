@@ -18,7 +18,7 @@ const MyEvents = () => {
     useEffect(() => {
         if (user?.email) {
             const email = user.email.toLowerCase();
-            fetch(`http://localhost:3000//my-events/?email=${email}`)
+            fetch(`https://eleventh-assignment-code-server.vercel.app/my-events/?email=${email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setEvents(data);
@@ -42,7 +42,7 @@ const MyEvents = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(` http://localhost:3000//events/${_id}`, {
+                fetch(` https://eleventh-assignment-code-server.vercel.app/events/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

@@ -7,6 +7,8 @@ import Banner from './Banner';
 import StatsSection from './StatsSection';
 import Comment from './Comments';
 import ScrollToTop from '../Components/ScrollToTop';
+import EventCalendar from '../Components/EventCalendar';
+import ContactSection from './ContactSection';
 
 
 const Home = () => {
@@ -28,7 +30,13 @@ const Home = () => {
 
       <section>
         <Trainer></Trainer>
+      </section>
 
+      <section>
+        <EventCalendar></EventCalendar>
+      </section>
+      <section>
+        <ContactSection/>
       </section>
 
       <section>
@@ -43,6 +51,7 @@ const Home = () => {
     <section>
       <ScrollToTop/>
     </section>
+
 
     </div>
   );

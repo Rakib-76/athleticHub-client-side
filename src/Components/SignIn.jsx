@@ -14,8 +14,10 @@ const SignIn = () => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+      const [isLoading, setIsLoading] = useState(false);
 
     const handleSignIn = (e) => {
+        setIsLoading(true);
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
@@ -63,6 +65,7 @@ const SignIn = () => {
                     <div className="card-body">
                         <form onSubmit={handleSignIn} noValidate>
                             <fieldset className="fieldset">
+                                  <h1 className='text-4xl font-bold'>Log In!</h1>
                                 <label className="label">Email</label>
                                 <input type="email" className="input" placeholder="Email" name='email' />
                                 {emailError && <p className="text-red-600 text-sm mt-1">{emailError}</p>}
@@ -84,9 +87,18 @@ const SignIn = () => {
 
                                 </div>
                                 {passwordError && <p className="text-red-600 text-sm mt-1">{passwordError}</p>}
-                                <div><a className="link link-hover">Forgot password?</a></div>
+                                <p className="text-sm text-right mt-2">
+                                    <a href="/reset-password" className="text-blue-600 hover:underline">
+                                        Forgot password?
+                                    </a>
+                                </p>
 
-                                <button className="btn btn-neutral mt-4">SignIn</button>
+                                <button
+                                 className="btn btn-neutral mt-4"
+                                   disabled={isLoading} 
+                                 >
+                                   {isLoading ? "SignIn..." : "SignIn"}
+                                    </button>
                                 <p className='font-bold text-center mt-4 text-accent'>
                                     Don’t Have An Account ? <Link to='/register' className='underline text-red-800'>Register</Link>
                                 </p>

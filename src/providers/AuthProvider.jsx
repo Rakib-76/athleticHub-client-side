@@ -40,7 +40,8 @@ const AuthInfo = {
     signIn,
     signWithGoogle,
     signOutUser,
-    updateUser
+    updateUser,
+    setUser
 
 };
 

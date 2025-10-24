@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.10.0",
     "firebase": "^11.8.1",
@@ -17,6 +18,7 @@
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.546.0",
     "react": "^19.1.0",
+    "react-calendar": "^6.0.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",
     "react-helmet": "^6.1.0",
